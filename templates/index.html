@@ -1,1 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CartWise | Smart Shopping</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <a href="#home" class="logo">CartWise</a>
+
+    <ul>
+
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+
+        <li><a href="#categories">Categories</a></li>
+
+        <li><a href="#products">Products</a></li>
+
+        <li><a href="#wishlist">Wishlist</a></li>
+
+        <li>
+            <a href="#cart">
+                Cart (<span id="cart-count">0</span>)
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <h1>
+            Shop Smart.<br>
+            Choose Better.
+        </h1>
+
+        <p>
+            Discover products you love, compare your choices,
+            and shop effortlessly with CartWise.
+        </p>
+
+        <button onclick="document.getElementById('products').scrollIntoView()">
+            Explore Products
+        </button>
+
+    </div>
+
+
+    <div class="hero-image">
+
+        <img
+            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=80"
+            alt="Modern shopping store"
+        >
+
+    </div>
+
+</section>
+
+
+<!-- ================= SEARCH ================= -->
+
+<div class="search-container">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search for products..."
+        onkeyup="searchProducts()"
+    >
+
+    <button onclick="searchProducts()">
+        Search
+    </button>
+
+</div>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section class="section" id="categories">
+
+    <h2>Shop by Category</h2>
+
+    <div class="categories">
+
+        <div class="category-card">
+            <img
+                src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80"
+                alt="Clothing"
+            >
+            <h3>Clothing</h3>
+        </div>
+
+
+        <div class="category-card">
+            <img
+                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"
+                alt="Shoes"
+            >
+            <h3>Shoes</h3>
+        </div>
+
+
+        <div class="category-card">
+            <img
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80"
+                alt="Electronics"
+            >
+            <h3>Electronics</h3>
+        </div>
+
+
+        <div class="category-card">
+            <img
+                src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80"
+                alt="Accessories"
+            >
+            <h3>Accessories</h3>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= ABOUT CARTWISE ================= -->
+
+<section class="section about-section" id="about">
+
+    <h2>About CartWise</h2>
+
+    <div class="about-box">
+
+        <div class="about-content">
+
+            <h3>Smart Shopping Made Simple</h3>
+
+            <p>
+                CartWise is a simple e-commerce platform designed
+                to make online shopping easy, organized and convenient.
+            </p>
+
+            <p>
+                Users can explore different product categories,
+                search for products, view product details, add items
+                to their cart or wishlist, and complete the checkout
+                process through a simple interface.
+            </p>
+
+            <p>
+                CartWise also includes a chatbot assistant that helps
+                users with basic product and shopping-related queries.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= WHY CHOOSE CARTWISE ================= -->
+
+<section class="section why-section" id="why-cartwise">
+
+    <h2>Why Choose CartWise?</h2>
+
+    <div class="why-cards">
+
+        <div class="why-card">
+
+            <h3>Easy Shopping</h3>
+
+            <p>
+                Simple navigation makes it easy for users
+                to explore and select products.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <h3>Smart Product Search</h3>
+
+            <p>
+                Quickly find products using the search
+                and category filtering features.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <h3>Wishlist & Cart</h3>
+
+            <p>
+                Save favourite products and manage selected
+                items conveniently in the shopping cart.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <h3>Shopping Assistant</h3>
+
+            <p>
+                The integrated chatbot provides quick answers
+                to basic product and shopping queries.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ================= PRODUCTS ================= -->
+
+<section class="section" id="products">
+
+    <h2>Featured Products</h2>
+
+
+    <div class="filter-buttons">
+
+        <button onclick="filterProducts('all')">
+            All
+        </button>
+
+        <button onclick="filterProducts('clothing')">
+            Clothing
+        </button>
+
+        <button onclick="filterProducts('shoes')">
+            Shoes
+        </button>
+
+        <button onclick="filterProducts('electronics')">
+            Electronics
+        </button>
+
+        <button onclick="filterProducts('accessories')">
+            Accessories
+        </button>
+
+    </div>
+
+
+    <div class="products">
+
+
+        <!-- PRODUCT 1 -->
+
+        <div class="product-card"
+             data-category="clothing"
+             data-name="Classic T-Shirt">
+
+            <img
+                src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80"
+                alt="Classic T-Shirt"
+            >
+
+            <div class="product-info">
+
+                <h3>Classic T-Shirt</h3>
+
+                <p>Comfortable everyday cotton wear.</p>
+
+                <div class="price">₹599</div>
+
+                <button
+                    class="wishlist-btn"
+                    onclick="toggleWishlist(this, 'Classic T-Shirt', 599)">
+                    ♡
+                </button>
+
+                <button onclick="addToCart('Classic T-Shirt', 599)">
+                    Add to Cart
+                </button>
+
+                <button
+                    class="details-btn"
+                    onclick="showProductDetails(
+                    'Classic T-Shirt',
+                    599,
+                    'Clothing',
+                    'Comfortable everyday cotton wear suitable for casual occasions.',
+                    'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80'
+                    )">
+                    View Details
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 2 -->
+
+        <div class="product-card"
+             data-category="shoes"
+             data-name="Classic Sneakers">
+
+            <img
+                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80"
+                alt="Classic Sneakers"
+            >
+
+            <div class="product-info">
+
+                <h3>Classic Sneakers</h3>
+
+                <p>Stylish and comfortable everyday shoes.</p>
+
+                <div class="price">₹899</div>
+
+                <button
+                    class="wishlist-btn"
+                    onclick="toggleWishlist(this, 'Classic Sneakers', 899)">
+                    ♡
+                </button>
+
+                <button onclick="addToCart('Classic Sneakers', 899)">
+                    Add to Cart
+                </button>
+
+                <button
+                    class="details-btn"
+                    onclick="showProductDetails(
+                    'Classic Sneakers',
+                    899,
+                    'Shoes',
+                    'Stylish and comfortable sneakers designed for everyday use.',
+                    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80'
+                    )">
+                    View Details
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 3 -->
+
+        <div class="product-card"
+             data-category="electronics"
+             data-name="Wireless Headphones">
+
+            <img
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=700&q=80"
+                alt="Wireless Headphones"
+            >
+
+            <div class="product-info">
+
+                <h3>Wireless Headphones</h3>
+
+                <p>Enjoy clear sound with wireless freedom.</p>
+
+                <div class="price">₹1,499</div>
+
+                <button
+                    class="wishlist-btn"
+                    onclick="toggleWishlist(this, 'Wireless Headphones', 1499)">
+                    ♡
+                </button>
+
+                <button onclick="addToCart('Wireless Headphones', 1499)">
+                    Add to Cart
+                </button>
+
+                <button
+                    class="details-btn"
+                    onclick="showProductDetails(
+                    'Wireless Headphones',
+                    1499,
+                    'Electronics',
+                    'Enjoy clear audio and wireless freedom with these stylish headphones.',
+                    'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80'
+                    )">
+                    View Details
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 4 -->
+
+        <div class="product-card"
+             data-category="accessories"
+             data-name="Casual Handbag">
+
+            <img
+                src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80"
+                alt="Casual Handbag"
+            >
+
+            <div class="product-info">
+
+                <h3>Casual Handbag</h3>
+
+                <p>Elegant design for everyday use.</p>
+
+                <div class="price">₹799</div>
+
+                <button
+                    class="wishlist-btn"
+                    onclick="toggleWishlist(this, 'Casual Handbag', 799)">
+                    ♡
+                </button>
+
+                <button onclick="addToCart('Casual Handbag', 799)">
+                    Add to Cart
+                </button>
+
+                <button
+                    class="details-btn"
+                    onclick="showProductDetails(
+                    'Casual Handbag',
+                    799,
+                    'Accessories',
+                    'An elegant and practical handbag suitable for everyday use.',
+                    'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=80'
+                    )">
+                    View Details
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 5 -->
+
+        <div class="product-card"
+             data-category="electronics"
+             data-name="Smart Watch">
+
+            <img
+                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80"
+                alt="Smart Watch"
+            >
+
+            <div class="product-info">
+
+                <h3>Smart Watch</h3>
+
+                <p>Modern design with smart features.</p>
+
+                <div class="price">₹1,999</div>
+
+                <button
+                    class="wishlist-btn"
+                    onclick="toggleWishlist(this, 'Smart Watch', 1999)">
+                    ♡
+                </button>
+
+                <button onclick="addToCart('Smart Watch', 1999)">
+                    Add to Cart
+                </button>
+
+                <button
+                    class="details-btn"
+                    onclick="showProductDetails(
+                    'Smart Watch',
+                    1999,
+                    'Electronics',
+                    'A modern smartwatch with useful smart features and a stylish design.',
+                    'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80'
+                    )">
+                    View Details
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 6 -->
+
+        <div class="product-card"
+             data-category="accessories"
+             data-name="Travel Backpack">
+
+            <img
+                src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=700&q=80"
+                alt="Travel Backpack"
+            >
+
+            <div class="product-info">
+
+                <h3>Travel Backpack</h3>
+
+                <p>Spacious and practical for travel.</p>
+
+                <div class="price">₹999</div>
+
+                <button
+                    class="wishlist-btn"
+                    onclick="toggleWishlist(this, 'Travel Backpack', 999)">
+                    ♡
+                </button>
+
+                <button onclick="addToCart('Travel Backpack', 999)">
+                    Add to Cart
+                </button>
+
+                <button
+                    class="details-btn"
+                    onclick="showProductDetails(
+                    'Travel Backpack',
+                    999,
+                    'Accessories',
+                    'A spacious and practical backpack designed for travel and everyday use.',
+                    'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=80'
+                    )">
+                    View Details
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PRODUCT DETAILS ================= -->
+
+<section
+    class="product-details-section"
+    id="product-details"
+>
+
+    <h2>Product Details</h2>
+
+    <div class="product-details-box">
+
+        <div class="product-details-image">
+
+            <img
+                id="details-image"
+                src=""
+                alt="Product"
+            >
+
+        </div>
+
+
+        <div class="product-details-info">
+
+            <p class="details-category">
+                Category:
+                <span id="details-category"></span>
+            </p>
+
+            <h1 id="details-name">
+                Product Name
+            </h1>
+
+            <div class="details-price">
+                ₹<span id="details-price">0</span>
+            </div>
+
+            <p id="details-description">
+                Product description will appear here.
+            </p>
+
+            <button onclick="addDetailsProductToCart()">
+                Add to Cart
+            </button>
+
+            <button onclick="addDetailsProductToWishlist()">
+                Add to Wishlist
+            </button>
+
+            <button
+                class="back-button"
+                onclick="document.getElementById('products').scrollIntoView()">
+                Back to Products
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= WISHLIST ================= -->
+
+<section class="section wishlist-section" id="wishlist">
+
+    <h2>My Wishlist</h2>
+
+    <div class="wishlist-box">
+
+        <div id="wishlist-items">
+
+            <p>
+                No products added to wishlist yet.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CART ================= -->
+
+<section class="section cart-section" id="cart">
+
+    <h2>Your Shopping Cart</h2>
+
+    <div class="cart-box">
+
+        <div class="cart-summary">
+
+            <div>
+                <span>Items</span>
+                <strong id="cart-items">0</strong>
+            </div>
+
+            <div>
+                <span>Total</span>
+                <strong>
+                    ₹<span id="cart-total">0</span>
+                </strong>
+            </div>
+
+        </div>
+
+
+        <button
+            class="view-cart-btn"
+            onclick="viewCart()">
+            View Cart
+        </button>
+
+
+        <button
+            class="checkout-btn"
+            onclick="openCheckout()">
+            Proceed to Checkout
+        </button>
+
+    </div>
+
+
+    <div id="cart-details" class="cart-details">
+
+        <h3>Your Cart</h3>
+
+        <div id="cart-product-list"></div>
+
+        <div class="cart-final">
+
+            <strong>
+                Total:
+                ₹<span id="cart-final-total">0</span>
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CHECKOUT ================= -->
+
+<section class="section checkout-section" id="checkout">
+
+    <h2>Checkout</h2>
+
+    <div class="checkout-box">
+
+        <form onsubmit="placeOrder(event)">
+
+            <div class="form-group">
+
+                <label>Full Name</label>
+
+                <input
+                    type="text"
+                    id="customer-name"
+                    placeholder="Enter your name"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Email Address</label>
+
+                <input
+                    type="email"
+                    id="customer-email"
+                    placeholder="Enter your email"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Phone Number</label>
+
+                <input
+                    type="tel"
+                    id="customer-phone"
+                    placeholder="Enter your phone number"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Delivery Address</label>
+
+                <textarea
+                    id="customer-address"
+                    placeholder="Enter your delivery address"
+                    required></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Payment Method</label>
+
+                <select id="payment-method" required>
+
+                    <option value="">
+                        Select payment method
+                    </option>
+
+                    <option value="Cash on Delivery">
+                        Cash on Delivery
+                    </option>
+
+                    <option value="UPI">
+                        UPI
+                    </option>
+
+                    <option value="Card">
+                        Credit / Debit Card
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="checkout-total">
+
+                <span>Order Total</span>
+
+                <strong>
+                    ₹<span id="checkout-total">0</span>
+                </strong>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="place-order-btn">
+                Place Order
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ORDER CONFIRMATION ================= -->
+
+<section
+    class="section order-confirmation"
+    id="order-confirmation">
+
+    <div class="confirmation-box">
+
+        <h2>Order Confirmed!</h2>
+
+        <p>
+            Thank you for shopping with CartWise.
+        </p>
+
+        <p>
+            Your order has been placed successfully.
+        </p>
+
+        <div class="order-number">
+
+            Order ID:
+            <strong id="order-id"></strong>
+
+        </div>
+
+        <button
+            onclick="document.getElementById('products').scrollIntoView()">
+            Continue Shopping
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CHATBOT ================= -->
+
+<section class="chatbot">
+
+    <h2>CartWise Assistant</h2>
+
+    <div id="chat-box">
+
+        <p>
+            <strong>Assistant:</strong>
+            Hello! How can I help you with your shopping today?
+        </p>
+
+    </div>
+
+
+    <div class="chat-input">
+
+        <input
+            type="text"
+            id="user-message"
+            placeholder="Ask about products, prices, delivery..."
+            onkeydown="handleEnter(event)">
+
+        <button onclick="sendMessage()">
+            Send
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 CartWise. Smart Shopping Made Simple.
+    </p>
+
+</footer>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
